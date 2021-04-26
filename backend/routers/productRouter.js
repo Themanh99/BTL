@@ -103,7 +103,7 @@ productRouter.post(
             mau: 'Do',
             brand: 'Nhan hieu',
             rating: 0,
-            review: 0,
+            numreview: 0,
             soluongco: 0,
             isActive: true,
             seller: req.user._id,
