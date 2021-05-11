@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import MessageBox from '../Components/MessageBox';
 
+
 function CartScreen(props) {
 
     const cart = useSelector(state => state.cart);
@@ -33,7 +34,7 @@ function CartScreen(props) {
         {error && <MessageBox variant="danger">{error}</MessageBox>}
         {cartItems.length === 0 ? (
           <MessageBox>
-            Giỏ hàng trống ! <Link to="/">Tiếp tục mua sắm</Link>
+            Giỏ hàng trống ! <Link to="/products">Tiếp tục mua sắm</Link>
           </MessageBox>
         ) : (
           <ul>

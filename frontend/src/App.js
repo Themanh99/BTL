@@ -25,19 +25,20 @@ import HeaderAdmin from './Views/Components/HeaderAdmin';
 import HeaderSeller from './Views/Components/HeaderSeller';
 import AddproductsScreen from './Views/products/AddproductsScreen';
 import ProductEditScreen from './Views/products/ProductEditScreen';
-import Thongke from './Views/homescreen/Thongke';
 import OrderListScreen from './Views/homescreen/ManageOrderList';
 import ManageUserList from './Views/homescreen/ManageUserList';
 import UserEditScreen from './Views/homescreen/UserEditScreen';
 import SellerScreen from './Views/homescreen/SellerScreen';
 import SearchScreen from './Views/homescreen/SearchScreen';
 import SearchBox from './Views/Searchs/Searchs';
+import DashboardScreen from './Views/homescreen/Thongke';
+import OrderEditScreen from './Views/homescreen/OrderEditScreen';
 
 
 const { Header, Content ,Footer } = Layout;
 
 function App() {
-  const userSignin = useSelector(state => state.userSignin);
+  const userSignin = useSelector((state) => state.userSignin);
   const {userInfo} = userSignin;
 
   return (
@@ -59,7 +60,7 @@ function App() {
       <Content>
       {
           userInfo && userInfo.isAdmin ? (
-            <AdminRoute path="/thongke" component={Thongke} render></AdminRoute>
+            <AdminRoute path="/dashboard" component={DashboardScreen} render></AdminRoute>
           ): userInfo && userInfo.isSeller ? (
               <SellerRoute path="/manageproduct/seller" component={ManageProduct} render />
           ):
@@ -72,7 +73,7 @@ function App() {
             exact
             render>
       </AdminRoute>
-      <Route
+          <Route
             path="/search/name/:name?"
             component={SearchScreen}
             exact
@@ -88,15 +89,20 @@ function App() {
             exact
           ></Route>
           <Route
-            path="/search/category/:category/name/:name/min/:min/max/:max/rating/:rating/order/:order"
+            path="/search/category/:category/name/:name/min/:min/max/:max/rating/:rating/order/:order/pageNumber/:pageNumber"
             component={SearchScreen}
             exact
           ></Route>
-          <Route
+          {
+            userInfo && userInfo.isAdmin ? (
+              <div></div>
+            ):(<Route
               render={({ history }) => (
                 <SearchBox history={history}></SearchBox>
               )}
-            ></Route>
+            ></Route>)
+          }
+          
         <Route path="/seller/:id" component={SellerScreen}></Route>
         <Route path="/products/"  component={ ProductScreen } render/>
         <Route path="/signin" component={ SigninScreen } />
@@ -111,9 +117,16 @@ function App() {
         <Route path="/profile" component={ ProfileScreen } />
         <AdminRoute path="/themsanpham" component={AddproductsScreen} exact/>
         <AdminRoute path="/manageproduct" component={ManageProduct} render exact/>
+        <AdminRoute path="/manageproduct/pageNumber/:pageNumber" component={ManageProduct} render exact/>
         <AdminRoute path="/manageorder" component={OrderListScreen} exact/>
         <AdminRoute path="/manageuser" component={ManageUserList} exact/>
         <AdminRoute path="/user/:id/edit" component={UserEditScreen} render exact/>
+        <AdminRoute path="/order/:id/edit" component={OrderEditScreen} render exact/>
+        <AdminRoute
+            path="/dashboard"
+            component={DashboardScreen}
+            render
+          ></AdminRoute>
         <SellerRoute path="/manageproduct/seller" component={ManageProduct} exact/>
         <SellerRoute path="/manageorder/seller" component={OrderListScreen} exact/>
       </Content>

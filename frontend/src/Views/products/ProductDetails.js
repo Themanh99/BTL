@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { createReview, detailProducts } from '../../actions/productAction';
-import { Row, Col, Radio, Button, Rate, Tabs, Image } from 'antd';
-import { createFromIconfontCN } from '@ant-design/icons';
+import { Row, Col, Button, Rate, Tabs, Image } from 'antd';
+import { createFromIconfontCN, HeartTwoTone } from '@ant-design/icons';
 import { PRODUCT_REVIEW_CREATE_RESET } from '../../constants/productConstants';
 import MessageBox from '../Components/MessageBox';
 import LoadingBox from '../Components/LoadingBox';
 import Rating from '../Components/Rating';
+import { createYeuthich } from '../../actions/yeuthichAction';
 
 
 function ProductDetails(props) {
@@ -31,9 +32,16 @@ function ProductDetails(props) {
         error: errorReviewCreate,
         success: successReviewCreate,
     } = productReviewCreate;
+    const yeuthichCreate = useSelector((state) => state.yeuthichCreate);
+    const {
+        loading: loadingYeuthichCreate,
+        error: errorYeuthichCreate,
+        success: successYeuthichCreate,
+    } = yeuthichCreate;
 
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState('');
+    
     useEffect(() => {
         if (successReviewCreate) {
             window.alert('Gửi đánh giá thành công!');
@@ -42,7 +50,7 @@ function ProductDetails(props) {
             dispatch({ type: PRODUCT_REVIEW_CREATE_RESET });
         }
         dispatch(detailProducts(productId));
-    }, [dispatch, productId, successReviewCreate]);
+    }, [dispatch, productId, successReviewCreate,successYeuthichCreate]);
 
     const Addtocart = () => {
         props.history.push("/cart/" + productId + "?slmua=" + slmua)
@@ -56,6 +64,9 @@ function ProductDetails(props) {
         } else {
             alert('Hãy nhập đánh giá của bạn vào !');
         }
+    };
+    const placeOrderHandler = () => {
+        // dispatch(createYeuthich({yeuthichItems: product}));
     };
     return (
         <div>
@@ -80,6 +91,15 @@ function ProductDetails(props) {
                                     <Image
                                         width={500}
                                         src={product.image} />
+                                    <button onClick={placeOrderHandler(product)}>
+                                    <HeartTwoTone  twoToneColor="#eb2f96"/>
+                                    </button>
+                                    {loadingYeuthichCreate && <LoadingBox></LoadingBox>}
+                                                            {errorYeuthichCreate && (
+                                                                <MessageBox variant="danger">
+                                                                    {errorYeuthichCreate}
+                                                                </MessageBox>
+                                                            )}
                                 </div>
                             </Col>
                             <Col span={1}></Col>
@@ -121,17 +141,14 @@ function ProductDetails(props) {
                                             <b>Trạng thái : </b> {product.soluongco > 0 ? "Còn hàng" : "Hết hàng"}
                                         </li>
                                         <li>
-                                            <div className="row">
-                                                <div>Giá</div>
-                                                <div className="price">${product.price}</div>
-                                            </div>
+                                            <br />
+                                            <b>Cỡ giày : </b> Size {product.cogiay}
                                         </li>
                                     </ul>
                                 </div>
                                 <br />
                                 <Row>
                                     <Col span={9}>Số lượng</Col>
-                                    <Col span={9}>Cỡ giày</Col>
                                 </Row>
                                 <Row>
                                     <Col span={9}>
@@ -140,15 +157,6 @@ function ProductDetails(props) {
                                                 <option key={x + 1} value={x + 1}>{x + 1}</option>
                                             )}
                                         </select>
-                                    </Col>
-                                    <Col span={10}>
-                                        {/* thay doi gia tri cho radio va gom nhóm chúng  */}
-                                        <Radio.Group defaultValue="37">
-                                            <Radio.Button value="37">37</Radio.Button>
-                                            <Radio.Button value="38">38</Radio.Button>
-                                            <Radio.Button value="39">39</Radio.Button>
-                                            <Radio.Button value="40">40</Radio.Button>
-                                        </Radio.Group>
                                     </Col>
                                 </Row>
                                 <br></br>

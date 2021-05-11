@@ -34,6 +34,7 @@ const data =  {
             numreview: 10,
             soluongco: 0,
             isActive: true,
+            cogiay: 40
         },
         {
             name: 'Jordan 4 Retro Golf White Cement',
@@ -51,6 +52,7 @@ const data =  {
             numreview: 10,
             soluongco: 10,
             isActive: true,
+            cogiay: 39
         },
         {
 
@@ -69,6 +71,7 @@ const data =  {
             numreview: 10,
             soluongco: 10,
             isActive: true,
+            cogiay: 38
         },
         {
             name: 'Supreme x Dunk Low OG SB QS Hyper Royal',
@@ -86,6 +89,7 @@ const data =  {
             numreview: 10,
             soluongco: 10,
             isActive: true,
+            cogiay: 37
         },
         {
             name: 'Nike Dunk Low SP City Market',
@@ -103,6 +107,7 @@ const data =  {
             numreview: 10,
             soluongco: 10,
             isActive: true,
+            cogiay: 37
         },
         {
             name: 'Wmns Supernova Black Vivid Red',
@@ -120,6 +125,7 @@ const data =  {
             numreview: 10,
             soluongco: 10,
             isActive: true,
+            cogiay: 41
         },
         {
             name: 'Air Structure GS Black Smoke Grey',
@@ -137,6 +143,7 @@ const data =  {
             numreview: 10,
             soluongco: 10,
             isActive: true,
+            cogiay: 40
         },
         {
             name: 'Ananas Track 6 Suede Moonphase',
@@ -154,6 +161,7 @@ const data =  {
             numreview: 10,
             soluongco: 10,
             isActive: true,
+            cogiay: 39
         },
         {
             name: 'Ananas Track 6 Suede Moonphase',
@@ -171,6 +179,7 @@ const data =  {
             numreview: 10,
             soluongco: 10,
             isActive: true,
+            cogiay: 38
         },
         {
             name: 'Ananas Track 6 Suede Moonphase',
@@ -188,6 +197,7 @@ const data =  {
             numreview: 10,
             soluongco: 10,
             isActive: true,
+            cogiay: 39
         },
         {
             name: 'Ananas Track 6 Suede Moonphase',
@@ -205,6 +215,7 @@ const data =  {
             numreview: 10,
             soluongco: 10,
             isActive: true,
+            cogiay: 38
         },
         {
             name: 'Ananas Track 6 Suede Moonphase',
@@ -222,6 +233,7 @@ const data =  {
             numreview: 10,
             soluongco: 10,
             isActive: true,
+            cogiay: 41
         },
         {
             name: 'Yeezy Boost 350 V2 Ash Blue',
@@ -239,6 +251,7 @@ const data =  {
             numreview: 10,
             soluongco: 10,
             isActive: true,
+            cogiay: 40
         },
         {
             name: 'Yeezy Boost 350 V2 Ash Stone',
@@ -256,6 +269,7 @@ const data =  {
             numreview: 10,
             soluongco: 10,
             isActive: true,
+            cogiay: 40
         },
         {
             name: 'LeBron 8 PS Empire Jade',
@@ -273,6 +287,7 @@ const data =  {
             numreview: 10,
             soluongco: 10,
             isActive: true,
+            cogiay: 39
         },
         {
             name: 'Jordan 4 Retro Taupe Haze (GS)',
@@ -290,6 +305,7 @@ const data =  {
             numreview: 13,
             soluongco: 10,
             isActive: true,
+            cogiay: 39
         }
     ]
 }

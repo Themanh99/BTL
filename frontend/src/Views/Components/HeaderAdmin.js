@@ -47,8 +47,8 @@ function HeaderAdmin(props) {
                         <Link to="/manageuser/">Quản Lý User
                         </Link>
                     </Menu.Item>
-                    <Menu.Item key="thongke">
-                        <Link to="/thongke/">Thống Kê
+                    <Menu.Item key="dashboard">
+                        <Link to="/dashboard/">Thống Kê
                         </Link>
                     </Menu.Item>
                     <Menu.Item key="signins">

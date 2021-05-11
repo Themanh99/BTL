@@ -22,6 +22,7 @@ import { PRODUCT_DETAILS_FAIL,
   PRODUCT_DETAILS_SUCCESS } from '../constants/productConstants';
 
 export const listProducts = ({
+  pageNumber = '',
   seller = '',
   name = '',
   category = '',
@@ -34,7 +35,7 @@ export const listProducts = ({
     type: PRODUCT_LIST_REQUEST,
   });
   try {
-    const { data } = await Axios.get(`/api/products?seller=${seller}&name=${name}&category=${category}&min=${min}&max=${max}&rating=${rating}&order=${order}`);
+    const { data } = await Axios.get(`/api/products?pageNumber=${pageNumber}&seller=${seller}&name=${name}&category=${category}&min=${min}&max=${max}&rating=${rating}&order=${order}`);
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message });

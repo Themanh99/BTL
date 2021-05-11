@@ -35,6 +35,9 @@ function Headers(props) {
             <Menu.Item key="1">
                 <Link to="/orderhistory">Lịch sử mua </Link>
             </Menu.Item>
+            <Menu.Item key="2">
+                <Link to="/yeuthich">Danh sách yêu thích </Link>
+            </Menu.Item>
             <Menu.Divider />
             <Menu.Item key="3">
                 <Link to="" onClick={signoutHandler}>

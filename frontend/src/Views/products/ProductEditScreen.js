@@ -18,6 +18,7 @@ export default function ProductEditScreen(props) {
     const [kieudang, setKieudang] = useState('');
     const [dongsanpham, setDongsanpham] = useState('');
     const [mau, setMau] = useState('');
+    const [cogiay,setCogiay] =useState('');
     const [isActive, setIsactive] = useState('');
 
     const productDetails = useSelector((state) => state.productDetails);
@@ -47,6 +48,7 @@ export default function ProductEditScreen(props) {
             setKieudang(product.kieudang);
             setDongsanpham(product.dongsanpham);
             setMau(product.mau);
+            setCogiay(product.cogiay);
             setIsactive(product.isActive);
         }
     }, [product, dispatch, productId, successUpdate, props.history]);
@@ -64,6 +66,7 @@ export default function ProductEditScreen(props) {
             kieudang,
             dongsanpham,
             mau,
+            cogiay,
             isActive
         }));
         window.alert('Cập nhật thông tin thành công!')
@@ -220,6 +223,16 @@ export default function ProductEditScreen(props) {
                                 placeholder="Enter mau"
                                 value={mau}
                                 onChange={(e) => setMau(e.target.value)}
+                            ></textarea>
+                        </div>
+                        <div>
+                            <label htmlFor="cogiay">Cỡ giày</label>
+                            <textarea
+                                id="cogiay"
+                                type="text"
+                                placeholder="Enter cogiay"
+                                value={cogiay}
+                                onChange={(e) => setCogiay(e.target.value)}
                             ></textarea>
                         </div>
                         <div className="radioActive">

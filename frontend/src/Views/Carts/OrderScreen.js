@@ -27,6 +27,7 @@ function OrderScreen(props) {
     };
     useEffect(() => {
         if (success) {
+            window.alert('Đặt hàng thành công!')
             props.history.push(`/order/${order._id}`);
             dispatch({ type: ORDER_CREATE_RESET });
         }

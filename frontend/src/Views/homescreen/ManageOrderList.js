@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteOrder, listOrders } from '../../actions/orderAction';
+import {  deleteOrder, listOrders } from '../../actions/orderAction';
 import { ORDER_DELETE_RESET } from '../../constants/orderConstants';
 import LoadingBox from '../Components/LoadingBox';
 import MessageBox from '../Components/MessageBox';
@@ -9,26 +9,27 @@ export default function OrderListScreen(props) {
   const sellerMode = props.match.path.indexOf('/seller') >= 0;
   const orderList = useSelector((state) => state.orderList);
   const { loading, error, orders } = orderList;
+  
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
   const orderDelete = useSelector((state) => state.orderDelete);
   const {
     loading: loadingDelete,
     error: errorDelete,
     success: successDelete,
   } = orderDelete;
-  const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo } = userSignin;
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch({ type: ORDER_DELETE_RESET });
     dispatch(listOrders({ seller: sellerMode ? userInfo._id : '' }));
-  }, [dispatch, successDelete,sellerMode,userInfo._id]);
-
+  }, [dispatch,sellerMode,userInfo._id,successDelete]);
   const deleteHandler = (order) => {
     if (window.confirm('Bạn có chắc muốn xóa order này không?')) {
-        dispatch(deleteOrder(order._id));
-      }
+      dispatch(deleteOrder(order._id));
+    }
   };
+
   return (
     <div>
       <h1>Thông tin đặt hàng</h1>
@@ -77,10 +78,22 @@ export default function OrderListScreen(props) {
                   <button
                     type="button"
                     className="small"
-                    onclick={() => deleteHandler(order)}
+                    onClick={() => {
+                      props.history.push(`/order/${order._id}/edit`);
+                    }}
                   >
-                    Xóa
+                    Done
                   </button>
+                  <button
+                    type="button"
+                    className="small"
+                    onClick={() => deleteHandler(order)}
+                  >
+                    Delete
+                  </button>
+                </td>
+                <td>
+                  
                 </td>
               </tr>
             ))}

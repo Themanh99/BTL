@@ -35,7 +35,7 @@ function HomeScreen(props) {
                 <div className="container-fluid">
                     <div className="titleHolder">
                         <h2>About Us</h2>
-                        <p>dolor sit amet, consectetur adipisicing elit</p>
+                        <p>Trang web tạo ra để bán giày online nhé các bạn</p>
                     </div>
                     <div className="contentHolder">
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit necessitatibus officiis repudiandae est deserunt delectus dolorem iure porro distinctio fuga, nostrum doloremque. Facilis porro in laborum dolor amet ratione hic? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam aut a porro, adipisci quidem sint enim pariatur ducimus, saepe voluptatibus inventore commodi! Quis, explicabo molestias libero tenetur temporibus perspiciatis deserunt.</p>
@@ -45,7 +45,7 @@ function HomeScreen(props) {
                             (
                                 <div>
                                     <div className="titleHolder">
-                                        <h2>Top Product</h2>
+                                        <h2>Top Đánh giá cao nhất</h2>
                                     </div>
                                     <Row gutter={[16, 16]}>
                                         {products.map((product) => {
@@ -71,6 +71,31 @@ function HomeScreen(props) {
                                 </div>
                             )
                     }
+                    <div className="row">
+                        <div className="col" style={{ backgroundColor: 'aliceblue', margin: '5px', borderRadius: '10px', marginLeft: '20px' }}>
+                            <div className="row">
+                                <div className="col" style={{ textAlignLast: 'left' }}>
+                                    <img alt="" src="images/icon1.png" style={{ width: '100px', height: '100px', marginTop: '14px' }} />
+                                </div>
+                                <div className="col" style={{ border:"box-sizing" }}>
+                                    <h3>Giao hàng miễn phí</h3>
+                                    <p>Miễn phí giao hàng trong nội thành Hà Nội</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col" style={{ backgroundColor: 'aliceblue', margin: '5px', borderRadius: '10px' }}>
+                            <div className="row">
+                                <div className="col" style={{ textAlignLast: 'left' }}>
+                                    <img  alt="" src="images/icon3.png" style={{ width: '100px', height: '100px', marginTop: '14px' }} />
+                                </div>
+                                <div className="col" style={{ border:"box-sizing"}}>
+                                    <h3>Khuyến mại</h3>
+                                    <p>Khuyến mại sản phẩm nếu đơn hàng trên 20.000.000đ</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
                 </div>
             </div>
         </div>

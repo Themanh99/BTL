@@ -19,7 +19,7 @@ function SigninScreen(props) {
     
     useEffect(() => {
         if (userInfo && userInfo.isAdmin) {
-            props.history.push('/thongke');
+            props.history.push('/dashboard');
         }
         else if(userInfo){
           props.history.push(redirect);

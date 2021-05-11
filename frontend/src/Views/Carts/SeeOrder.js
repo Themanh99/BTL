@@ -83,14 +83,15 @@ function SeeOrder(props) {
                                         <p>
                                             <strong>Họ tên người đặt:</strong> {order.ConfirmInfo.fullName} <br />
                                             <strong>Địa chỉ giao hàng: </strong> {order.ConfirmInfo.address},
-                  {order.ConfirmInfo.phoneNumber}
-                  ,{order.ConfirmInfo.country}
+                                                                                {order.ConfirmInfo.phoneNumber}
+                                                                                    ,{order.ConfirmInfo.country}
                                         </p>
                                         {order.isDelivered ? (<MessageBox variant="success">Đã gửi lúc:{order.deliveredAt}</MessageBox>)
                                             : (
                                                 <MessageBox variant="danger">Chưa được gửi</MessageBox>
                                             )
                                         }
+                                        <p>{order.trangthaidon}</p>
                                     </div>
                                 </li>
                                 <li>

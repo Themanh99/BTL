@@ -18,18 +18,20 @@ function ProductScreen(props) {
             {
                 loading ? (<LoadingBox></LoadingBox>) :
                     error ? (<MessageBox variant="danger">{error}</MessageBox>)
-                        : 
+                        :
                         (
                             <div>
-                            <li className="products">
-                            {products.length === 0 && <MessageBox>Không có sản phẩm nào!</MessageBox>}
-                                {products.map((product) => (
-                                    <Products key={product._id} product={product}></Products>
-                                )
-                                )}
-                            </li>
+                                <li className="products">
+                                    {products.length === 0 && <MessageBox>Không có sản phẩm nào!</MessageBox>}
+                                    {products.map((product) => (
+                                        <Products key={product._id} product={product}></Products>
+                                    )
+                                    )}
+                                </li>
                             </div>
+
                         )
+
             }
         </div>
     )

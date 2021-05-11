@@ -17,6 +17,13 @@ import {ORDER_CREATE_FAIL, ORDER_CREATE_REQUEST ,
       ORDER_PAY_REQUEST,
       ORDER_PAY_RESET,
       ORDER_PAY_SUCCESS,
+      ORDER_SUMMARY_FAIL,
+      ORDER_SUMMARY_REQUEST,
+      ORDER_SUMMARY_SUCCESS,
+      ORDER_UPDATE_FAIL,
+      ORDER_UPDATE_REQUEST,
+      ORDER_UPDATE_RESET,
+      ORDER_UPDATE_SUCCESS,
       XEM_LICHSUMUA_FAIL,
       XEM_LICHSUMUA_REQUEST,
       XEM_LICHSUMUA_SUCCESS} from '../constants/orderConstants';
@@ -103,6 +110,21 @@ export const orderDeleteReducer = (state = {}, action) => {
     }
 };
 
+export const orderUpdateReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ORDER_UPDATE_REQUEST:
+      return { loading: true };
+    case ORDER_UPDATE_SUCCESS:
+      return { loading: false, success: true };
+    case ORDER_UPDATE_FAIL:
+      return { loading: false, error: action.payload };
+    case ORDER_UPDATE_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
   export const orderDeliverReducer = (state = {}, action) => {
     switch (action.type) {
       case ORDER_DELIVER_REQUEST:
@@ -113,6 +135,22 @@ export const orderDeleteReducer = (state = {}, action) => {
         return { loading: false, error: action.payload };
       case ORDER_DELIVER_RESET:
         return {};
+      default:
+        return state;
+    }
+  };
+
+  export const orderSummaryReducer = (
+    state = { loading: true, summary: {} },
+    action
+  ) => {
+    switch (action.type) {
+      case ORDER_SUMMARY_REQUEST:
+        return { loading: true };
+      case ORDER_SUMMARY_SUCCESS:
+        return { loading: false, summary: action.payload };
+      case ORDER_SUMMARY_FAIL:
+        return { loading: false, error: action.payload };
       default:
         return state;
     }

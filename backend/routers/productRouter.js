@@ -7,10 +7,11 @@ import { isAdmin, isAuth, isSellerOrAdmin } from '../util.js';
 
 const productRouter = express.Router();
 
-productRouter.get(
-    '/',
+productRouter.get('/',
     expressAsyncHandler(async (req, res) => {
-        const name = req.query.name || '';
+      const pageSize = 6;
+      const page = Number(req.query.pageNumber) || 1;
+    const name = req.query.name || '';
     const category = req.query.category || '';
     const seller = req.query.seller || '';
     const order = req.query.order || '';
@@ -36,28 +37,33 @@ productRouter.get(
         : order === 'toprated'
         ? { rating: -1 }
         : { _id: -1 };
+        const count = await Product.count({
+          ...sellerFilter,
+          ...nameFilter,
+          ...categoryFilter,
+          ...priceFilter,
+          ...ratingFilter,
+        });
         const products = await Product.find({
             ...sellerFilter,
       ...nameFilter,
       ...categoryFilter,
       ...priceFilter,
       ...ratingFilter,
-        }).sort(sortOrder);;
-        res.send(products);
+        }).sort(sortOrder).skip(pageSize * (page - 1)).limit(pageSize);
+        res.send({ products, page, pages: Math.ceil(count / pageSize) });
     })
 );
-productRouter.get(
-    '/categories',
+productRouter.get('/categories',
     expressAsyncHandler(async (req, res) => {
       const categories = await Product.find().distinct('category');
       res.send(categories);
     })
   );
 
-productRouter.get(
-    '/top-product',
+productRouter.get('/top-product',
     expressAsyncHandler(async (req,res) =>{
-        const products = await Product.find({}).sort({ 'price': -1 }).limit(3);
+        const products = await Product.find({}).sort({ 'rating': -1 }).limit(3);
         res.send(products);
     })
 );
@@ -70,8 +76,7 @@ productRouter.get('/seed',
     })
 );
 
-productRouter.get(
-  '/:id',
+productRouter.get('/:id',
   expressAsyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id).populate(
       'seller',
@@ -85,8 +90,7 @@ productRouter.get(
   })
 );
 
-productRouter.post(
-    '/',
+productRouter.post('/',
     isAuth,
     isSellerOrAdmin,
     expressAsyncHandler(async (req, res) => {
@@ -107,13 +111,13 @@ productRouter.post(
             soluongco: 0,
             isActive: true,
             seller: req.user._id,
+            cogiay: 38
         });
         const createdProduct = await product.save();
         res.send({ message: 'Sản phẩm đã được tạo', product: createdProduct });
     })
 );
-productRouter.put(
-    '/:id',
+productRouter.put('/:id',
     isAuth,
     isSellerOrAdmin,
     expressAsyncHandler(async (req, res) => {
@@ -131,6 +135,7 @@ productRouter.put(
             product.brand = req.body.brand;
             product.soluongco = req.body.soluongco;
             product.isActive = req.body.isActive;
+            product.cogiay = req.body.cogiay;
             const updatedProduct = await product.save();
             res.send({ message: 'Product Updated', product: updatedProduct });
         } else {
@@ -138,8 +143,7 @@ productRouter.put(
         }
     })
 );
-productRouter.delete(
-    '/:id',
+productRouter.delete('/:id',
     isAuth,
     isAdmin,
     expressAsyncHandler(async (req, res) => {
@@ -153,8 +157,7 @@ productRouter.delete(
     })
   );
 
-  productRouter.post(
-  '/:id/reviews',
+  productRouter.post('/:id/reviews',
   isAuth,
   expressAsyncHandler(async (req, res) => {
     const productId = req.params.id;

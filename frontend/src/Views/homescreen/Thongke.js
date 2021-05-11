@@ -1,186 +1,152 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import Chart from 'react-google-charts';
+import { summaryOrder } from '../../actions/orderAction';
+import LoadingBox from '../Components/LoadingBox';
+import MessageBox from '../Components/MessageBox';
 
-function Thongke(props) {
-    return (
-        <div className="content-wrapper">
-            <div className="content">
-                <div className="container-fluid">
-                    <div className="row-lg-12">
-                        <div className="col-lg-12">
-                            <div className="card">
-                                <div className="card-header border-0">
-                                    <div className="d-flex justify-content-between">
-                                        <h3 className="card-title">Tổng doanh thu </h3>
-                                    </div>
-                                </div>
-                                <div className="card-body">
-                                    <div className="d-flex">
-                                        <p className="d-flex flex-column">
-                                            <span className="text-bold text-lg">1220</span>
-                                            <span>Visitors Over Time</span>
-                                        </p>
-                                        <p className="ml-auto d-flex flex-column text-right">
-                                            <span className="text-success">
-                                                <i className="fas fa-arrow-up" /> 12.5%
-                        </span>
-                                            <span className="text-muted">Since last week</span>
-                                        </p>
-                                    </div>
-                                    <div className="position-relative mb-4">
-                                        <canvas id="visitors-chart" height={200} />
-                                    </div>
-                                    <div className="d-flex flex-row justify-content-end">
-                                        <span className="mr-2">
-                                            <i className="fas fa-square text-primary" /> This Week
-                      </span>
-                                        <span>
-                                            <i className="fas fa-square text-gray" /> Last Week
-                      </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="card">
-                                <div className="card-header border-0">
-                                    <div className="d-flex justify-content-between">
-                                        <h3 className="card-title">Sản phẩm bán chạy theo </h3>
-                                    </div>
-                                </div>
-                                <div className="card-body">
-                                    <div className="d-flex">
-                                        <p className="d-flex flex-column">
-                                            <span className="text-bold text-lg">1220</span>
-                                            <span>Visitors Over Time</span>
-                                        </p>
-                                        <p className="ml-auto d-flex flex-column text-right">
-                                            <span className="text-success">
-                                                <i className="fas fa-arrow-up" /> 12.5%
-                        </span>
-                                            <span className="text-muted">Since last week</span>
-                                        </p>
-                                    </div>
-                                    <div className="position-relative mb-4">
-                                        <canvas id="visitors-chart" height={200} />
-                                    </div>
-                                    <div className="d-flex flex-row justify-content-end">
-                                        <span className="mr-2">
-                                            <i className="fas fa-square text-primary" /> This Week
-                      </span>
-                                        <span>
-                                            <i className="fas fa-square text-gray" /> Last Week
-                      </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="card">
-                                <div className="card-header border-0">
-                                    <h3 className="card-title">Dánh sách sản phẩm bán chạy</h3>
-                                    <div className="card-tools">
-                                        <a href="1" className="btn btn-tool btn-sm">
-                                            <i className="fas fa-download" />
-                                        </a>
-                                        <a href="2" className="btn btn-tool btn-sm">
-                                            <i className="fas fa-bars" />
-                                        </a>
-                                    </div>
-                                </div>
-                                <div className="card-body table-responsive p-0">
-                                    <table className="table table-striped table-valign-middle">
-                                        <thead>
-                                            <tr>
-                                                <th>Product</th>
-                                                <th>Price</th>
-                                                <th>Sales</th>
-                                                <th>More</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <img src="dist/img/default-150x150.png" alt="Product 1" className="img-circle img-size-32 mr-2" />
-                            Some Product
-                          </td>
-                                                <td>$13 USD</td>
-                                                <td>
-                                                    <small className="text-success mr-1">
-                                                        <i className="fas fa-arrow-up" />
-                              12%
-                            </small>
-                            12,000 Sold
-                          </td>
-                                                <td>
-                                                    <a href="3" className="text-muted">
-                                                        <i className="fas fa-search" />
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <img src="dist/img/default-150x150.png" alt="Product 1" className="img-circle img-size-32 mr-2" />
-                            Another Product
-                          </td>
-                                                <td>$29 USD</td>
-                                                <td>
-                                                    <small className="text-warning mr-1">
-                                                        <i className="fas fa-arrow-down" />
-                              0.5%
-                            </small>
-                            123,234 Sold
-                          </td>
-                                                <td>
-                                                    <a href="4" className="text-muted">
-                                                        <i className="fas fa-search" />
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <img src="dist/img/default-150x150.png" alt="Product 1" className="img-circle img-size-32 mr-2" />
-                            Amazing Product
-                          </td>
-                                                <td>$1,230 USD</td>
-                                                <td>
-                                                    <small className="text-danger mr-1">
-                                                        <i className="fas fa-arrow-down" />
-                              3%
-                            </small>
-                            1912 Sold
-                          </td>
-                                                <td>
-                                                    <a href="5" className="text-muted">
-                                                        <i className="fas fa-search" />
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <img src="dist/img/default-150x150.png" alt="Product 1" className="img-circle img-size-32 mr-2" />
-                            Perfect Item
-                            <span className="badge bg-danger">NEW</span>
-                                                </td>
-                                                <td>$199 USD</td>
-                                                <td>
-                                                    <small className="text-success mr-1">
-                                                        <i className="fas fa-arrow-up" />
-                              123%
-                            </small>
-                            127 Sold
-                          </td>
-                                                <td>
-                                                    <a href="12" className="text-muted">
-                                                        <i className="fas fa-search" />
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+export default function DashboardScreen() {
+  const orderSummary = useSelector((state) => state.orderSummary);
+  const { loading, summary, error } = orderSummary;
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(summaryOrder());
+  }, [dispatch]);
+  return (
+    <div>
+      <div className="row">
+        <h1>Thống kê</h1>
+      </div>
+      {loading ? (
+        <LoadingBox />
+      ) : error ? (
+        <MessageBox variant="danger">{error}</MessageBox>
+      ) : (
+        <>
+          <ul className="row summary">
+            <li>
+              <div className="summary-title color1">
+                <span>
+                  <i className="fa fa-users" /> Tổng Người dùng
+                </span>
+              </div>
+              <div className="summary-body">{summary.users[0].numUsers}</div>
+            </li>
+            <li>
+              <div className="summary-title color2">
+                <span>
+                  <i className="fa fa-shopping-cart" /> Tổng Đơn hàng
+                </span>
+              </div>
+              <div className="summary-body">
+                {summary.orders[0] ? summary.orders[0].numOrders : 0}
+              </div>
+            </li>
+            <li>
+              <div className="summary-title color3">
+                <span>
+                  <i className="fa fa-money" /> Doanh số
+                </span>
+              </div>
+              <div className="summary-body">
+                $
+                {summary.orders[0]
+                  ? summary.orders[0].totalSales.toFixed(2)
+                  : 0}
+              </div>
+            </li>
+          </ul>
+          <ul className="row summary">
+            <li>
+              <div className="summary-title color1">
+                <span>
+                  <i className="fa fa-users" /> Người dùng mới
+                </span>
+              </div>
+              <Chart
+                width={'500px'}
+                height={'300px'}
+                chartType="PieChart"
+                loader={<div>Loading Chart</div>}
+                data={[
+                  ['Ngày', 'Số người'],
+                  ...summary.usersnew.map((x) => [x._id, x.numUsers]),
+                ]}
+                options={{
+                  title: 'Lượng người dùng theo tháng',
+                  is3D: true,
+                }}
+                rootProps={{ 'data-testid': '1' }}
+              />
+            </li>
+            <li>
+              <div className="summary-title color3">
+                <span>
+                  <i className="fa fa-money" /> Doanh số tháng
+                </span>
+              </div>
+              <div className="summary-body">
+              <Chart
+                width={'500px'}
+                height={'280px'}
+                chartType="AreaChart"
+                loader={<div>Loading Chart</div>}
+                data={[
+                  ['Date', 'Doanh số'],
+                    ...summary.monthOrders.map((x) => [x._id, x.sales]),
+                ]}
+                options={{
+                  title: 'Doanh số tháng',
+                  hAxis: { title: 'Tháng', titleTextStyle: { color: '#333' } },
+                  vAxis: { minValue: 0 },
+                  // For the legend to fit, we make the chart area smaller
+                  chartArea: { width: '50%', height: '70%' },
+                  // lineWidth: 25
+                }}
+                // For tests
+                rootProps={{ 'data-testid': '1' }}
+              />
+              </div>
+            </li>
+          </ul>
+          <div>
+            <div>
+              <h2>Biểu đồ doanh số</h2>
+              {summary.dailyOrders.length === 0 ? (
+                <MessageBox>No Sale</MessageBox>
+              ) : (
+                <Chart
+                  width="100%"
+                  height="400px"
+                  chartType="AreaChart"
+                  loader={<div>Loading Chart</div>}
+                  data={[
+                    ['Date', 'Sales'],
+                    ...summary.dailyOrders.map((x) => [x._id, x.sales]),
+                  ]}
+                ></Chart>
+              )}
             </div>
-        </div>
-    );
+          </div>
+          <div>
+            <h2>Loại sản phẩm</h2>
+            {summary.productCategories.length === 0 ? (
+              <MessageBox>No Category</MessageBox>
+            ) : (
+              <Chart
+                width="100%"
+                height="400px"
+                chartType="PieChart"
+                loader={<div>Loading Chart</div>}
+                data={[
+                  ['Category', 'Products'],
+                  ...summary.productCategories.map((x) => [x._id, x.count]),
+                ]}
+              />
+            )}
+          </div>
+        </>
+      )}
+    </div>
+  );
 }
-
-export default Thongke;

@@ -29,6 +29,7 @@ const productSchema = new mongoose.Schema(
       isActive: { type: Boolean , required: true},
       seller: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
       reviews: [reviewSchema],
+      cogiay: { type: Number, required: true},
     },
     {
       timestamps: true,

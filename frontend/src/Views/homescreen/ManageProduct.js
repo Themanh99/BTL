@@ -5,12 +5,14 @@ import { createProduct, deleteProduct, listProducts } from '../../actions/produc
 import { PRODUCT_CREATE_RESET, PRODUCT_DELETE_RESET } from '../../constants/productConstants';
 import LoadingBox from '../Components/LoadingBox';
 import MessageBox from '../Components/MessageBox';
+import { Link, useParams } from 'react-router-dom';
 
 
 export default function ManageProduct(props) {
+  const { pageNumber = 1 } = useParams();
   const sellerMode = props.match.path.indexOf('/seller') >= 0;
   const productList = useSelector((state) => state.productList);
-  const { loading, error, products } = productList;
+  const { loading, error, products, page, pages } = productList;
 
   const productCreate = useSelector((state) => state.productCreate);
   const {
@@ -37,8 +39,8 @@ export default function ManageProduct(props) {
       window.alert('Đã xóa thành công !');
       dispatch({ type: PRODUCT_DELETE_RESET });
     }
-    dispatch(listProducts({ seller: sellerMode ? userInfo._id : '' }));
-  }, [createdProduct, dispatch, props.history,sellerMode, successCreate,successDelete,userInfo._id]);
+    dispatch(listProducts({ seller: sellerMode ? userInfo._id : '' ,pageNumber }));
+  }, [createdProduct, dispatch, props.history,sellerMode, successCreate,successDelete,userInfo._id,pageNumber ]);
 
   const deleteHandler = (product) => {
     if (window.confirm('Bạn có chắc muốn xóa sản phẩm này không?')) {
@@ -48,9 +50,6 @@ export default function ManageProduct(props) {
   const createHandler = () => {
     dispatch(createProduct());
   };
-  const chuyentrang = () => {
-    props.history.push('/themsanpham');
-  }
   return (
     <div>
     <h1>Danh sách sản phẩm</h1>
@@ -58,12 +57,8 @@ export default function ManageProduct(props) {
       
       <button type="button" className="primary" onClick={createHandler}>
       <PlusSquareTwoTone />
-          Thêm nhanh
-        </button>
-        <button type="button" className="primary" onClick={chuyentrang}>
-          <PlusSquareTwoTone />
           Thêm sản phẩm
-      </button>
+        </button>
       </div>
       {loadingDelete && <LoadingBox>
       </LoadingBox>}
@@ -76,6 +71,7 @@ export default function ManageProduct(props) {
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
+        <>
         <table className="table">
           <thead>
             <tr>
@@ -121,6 +117,18 @@ export default function ManageProduct(props) {
             ))}
           </tbody>
         </table>
+        <div className="row center pagination">
+            {[...Array(pages).keys()].map((x) => (
+              <Link
+                className={x + 1 === page ? 'active' : ''}
+                key={x + 1}
+                to={`/manageproduct/pageNumber/${x + 1}`}
+              >
+                {x + 1}
+              </Link>
+            ))}
+          </div>
+          </>
       )}
     </div>
   );

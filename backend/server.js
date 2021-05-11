@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import orderRouter from './routers/orderRouter.js';
 import uploadRouter from './routers/uploadRouter.js';
 import path from 'path';
+import yeuthichRouter from './routers/yeuthichRouter.js';
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/anhcherry' , {
   useCreateIndex: true,
 });
 
+app.use('/api/yeuthichs' , yeuthichRouter);
 app.use('/api/uploads', uploadRouter);
 app.use("/api/users", userRouter);
 app.use("/api/orders", orderRouter);
@@ -32,9 +34,7 @@ app.use(express.static(path.join(__dirname, '/frontend/build')));
 app.get('*', (req, res) =>
   res.sendFile(path.join(__dirname, '/frontend/build/index.html'))
 );
-// app.get("/" , (req,res) => {
-//     res.send("Server is already");
-// });
+
 app.use((err , req , res , next ) =>{
     res.status(500).send({ message: err.message});
 });

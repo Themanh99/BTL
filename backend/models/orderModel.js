@@ -33,6 +33,7 @@ const orderSchema = new mongoose.Schema(
       paidAt: { type: Date },
       isDelivered: { type: Boolean, default: false },
       deliveredAt: { type: Date },
+      trangthaidon: { type: String, required: true , default: "Chờ xác nhận"},
     },
     {
       timestamps: true,

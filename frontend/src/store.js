@@ -4,7 +4,8 @@ import thunk from 'redux-thunk';
 import { cartReducers } from './reducers/cartReducers';
 
 import { userDeleteReducer, userDetailReducer, userListReducer, userRegisterReducer, userSigninReducer, userUpdateProfileReducer, userUpdateReducer } from './reducers/userReducers';
-import { orderCreateReducer, orderDeleteReducer, orderDeliverReducer, orderDetailReducer, orderHistoryListReducer, orderListReducer, orderPayReducer } from './reducers/orderReducers';
+import { orderCreateReducer, orderDeleteReducer, orderDeliverReducer, orderDetailReducer, orderHistoryListReducer, orderListReducer, orderPayReducer, orderSummaryReducer, orderUpdateReducer } from './reducers/orderReducers';
+import { yeuthichCreateReducer, yeuthichListReducer } from './reducers/yeuthichReducers';
 
 
 const initialState = { 
@@ -40,6 +41,7 @@ const reducer = combineReducers({
     productDelete: productDeleteReducer,
     orderList: orderListReducer,
     orderDelete:orderDeleteReducer,
+    orderUpdate: orderUpdateReducer,
     orderDeliver: orderDeliverReducer,
     userList:userListReducer,
     userUpdate: userUpdateReducer,
@@ -47,6 +49,9 @@ const reducer = combineReducers({
     productTop: productTopReducer,
     productCategoryList:productCategoryListReducer,
     productReviewCreate:productReviewCreateReducer,
+    orderSummary: orderSummaryReducer,
+    yeuthichList: yeuthichListReducer,
+    yeuthichCreate: yeuthichCreateReducer,
 })
 // chú ý define ở đây là lúc mình dùng trong các component 
 // ví dụ: const {gì gì đó } = orderDetails
