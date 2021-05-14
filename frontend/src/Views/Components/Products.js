@@ -1,3 +1,4 @@
+import { Rate } from 'antd';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -16,7 +17,9 @@ function Product(props) {
                 </div>
                 <div className="product-brand">{product.brand}</div>
                 <div className="product-price">Giá: {product.price} $</div>
-                <div className="product-rating">{product.rating} Stars ({product.review})</div>
+                <div className="product-rating">{product.rating} Stars
+                                            <Rate value={product.rating} />
+                </div>
             </div>
         </li>
     );

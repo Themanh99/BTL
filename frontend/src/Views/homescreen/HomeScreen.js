@@ -1,4 +1,4 @@
-import { Carousel, Image, Row, Col } from 'antd';
+import { Carousel, Image, Row, Col, Rate } from 'antd';
 import React, { useEffect } from 'react';
 import { topProduct } from '../../actions/productAction';
 import { useDispatch, useSelector } from 'react-redux';
@@ -62,7 +62,9 @@ function HomeScreen(props) {
                                                         </div>
                                                         <div className="product-brand">{product.brand}</div>
                                                         <div className="product-price">{product.price}</div>
-                                                        <div className="product-rating">{product.rating} Stars ({product.review})</div>
+                                                        <div className="product-rating">{product.rating} Stars
+                                                             <Rate value={product.rating} />
+                                                        </div>
                                                     </div>
                                                 </Col>
                                             );
@@ -77,7 +79,7 @@ function HomeScreen(props) {
                                 <div className="col" style={{ textAlignLast: 'left' }}>
                                     <img alt="" src="images/icon1.png" style={{ width: '100px', height: '100px', marginTop: '14px' }} />
                                 </div>
-                                <div className="col" style={{ border:"box-sizing" }}>
+                                <div className="col" style={{ border: "box-sizing" }}>
                                     <h3>Giao hàng miễn phí</h3>
                                     <p>Miễn phí giao hàng trong nội thành Hà Nội</p>
                                 </div>
@@ -86,9 +88,9 @@ function HomeScreen(props) {
                         <div className="col" style={{ backgroundColor: 'aliceblue', margin: '5px', borderRadius: '10px' }}>
                             <div className="row">
                                 <div className="col" style={{ textAlignLast: 'left' }}>
-                                    <img  alt="" src="images/icon3.png" style={{ width: '100px', height: '100px', marginTop: '14px' }} />
+                                    <img alt="" src="images/icon3.png" style={{ width: '100px', height: '100px', marginTop: '14px' }} />
                                 </div>
-                                <div className="col" style={{ border:"box-sizing"}}>
+                                <div className="col" style={{ border: "box-sizing" }}>
                                     <h3>Khuyến mại</h3>
                                     <p>Khuyến mại sản phẩm nếu đơn hàng trên 20.000.000đ</p>
                                 </div>

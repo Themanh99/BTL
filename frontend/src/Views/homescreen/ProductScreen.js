@@ -20,7 +20,7 @@ function ProductScreen(props) {
                     error ? (<MessageBox variant="danger">{error}</MessageBox>)
                         :
                         (
-                            <div>
+                            
                                 <li className="products">
                                     {products.length === 0 && <MessageBox>Không có sản phẩm nào!</MessageBox>}
                                     {products.map((product) => (
@@ -28,7 +28,7 @@ function ProductScreen(props) {
                                     )
                                     )}
                                 </li>
-                            </div>
+                          
 
                         )
 

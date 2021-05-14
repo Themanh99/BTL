@@ -51,6 +51,7 @@ function SeeOrder(props) {
             dispatch({ type: ORDER_PAY_RESET });
             dispatch({ type: ORDER_DELIVER_RESET });
             dispatch(detailsOrder(orderId));
+
         } else {
             if (!order.isPaid) {
                 if (!window.paypal) {
@@ -68,7 +69,6 @@ function SeeOrder(props) {
     const deliverHandler = () => {
         dispatch(deliverOrder(order._id));
     };
-
     return loading ? (<LoadingBox></LoadingBox>) :
         error ? (<MessageBox variant="danger">{error}</MessageBox>) :
             (
@@ -100,7 +100,7 @@ function SeeOrder(props) {
                                         <p>
                                             <strong>Phương thức:</strong> {order.paymentMethod}
                                         </p>
-                                        {order.isPaid ? (<MessageBox variant="success">Đã thanh toán lúc:{order.isPaid}</MessageBox>)
+                                        {order.isPaid ? (<MessageBox variant="success">Đã thanh toán lúc: {order.paidAt}</MessageBox>)
                                             : (
                                                 <MessageBox variant="danger">Chưa thanh toán</MessageBox>
                                             )

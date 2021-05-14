@@ -1,6 +1,6 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
-import { isAuth , isAdmin , isSellerOrAdmin } from '../util.js';
+import { isAuth , isAdmin , isSellerOrAdmin ,mailgun, payOrderEmailTemplate} from '../util.js';
 import Order from '../models/orderModel.js';
 import User from '../models/userModel.js';
 import Product from '../models/productModel.js';
@@ -89,7 +89,7 @@ orderRouter.get(
   '/orderhistory',
   isAuth,
   expressAsyncHandler(async (req, res) => {
-    const orders = await Order.find({ user: req.user._id });
+    const orders = await Order.find({ user: req.user._id }).sort({'createdAt':-1});
     res.send(orders);
   })
 );
@@ -128,7 +128,10 @@ orderRouter.put(
     '/:id/pay',
     isAuth,
     expressAsyncHandler(async (req, res) => {
-      const order = await Order.findById(req.params.id);
+      const order = await Order.findById(req.params.id).populate(
+        'user',
+        'email name'
+      );
       if (order) {
         order.isPaid = true;
         order.paidAt = Date.now();
@@ -136,9 +139,27 @@ orderRouter.put(
           id: req.body.id,
           status: req.body.status,
           update_time: req.body.update_time,
-          email_address: req.body.email_address,
+          email_address: 'themanhchu1@gmail.com',
         };
         const updatedOrder = await order.save();
+        mailgun()
+        .messages()
+        .send(
+          {
+            from: 'Anh Cherry <sandbox55e027e35dc2454a8864bdec8c266919.mailgun.org>',
+            to: '<themanhchu1@gmail.com>',
+            subject: `New order ${order._id}`,
+            text: "Ban da thanh toan online qua trang web",
+            // html: payOrderEmailTemplate(order),
+          },
+          (error, body) => {
+            if (error) {
+              console.log(error);
+            } else {
+              console.log(body);
+            }
+          }
+        );
         res.send({ message: 'Order đã thanh toán!', order: updatedOrder });
       } else {
         res.status(404).send({ message: 'Order Not Found' });
