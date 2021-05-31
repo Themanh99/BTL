@@ -7,6 +7,9 @@ import MessageBox from '../Components/MessageBox';
 import { PayPalButton } from 'react-paypal-button-v2';
 import Axios from 'axios';
 import { ORDER_DELIVER_RESET, ORDER_PAY_RESET } from '../../constants/orderConstants';
+import jsPDF from 'jspdf';
+import * as html2canvas from 'html2canvas';
+
 
 function SeeOrder(props) {
     const orderId = props.match.params.id;
@@ -69,10 +72,22 @@ function SeeOrder(props) {
     const deliverHandler = () => {
         dispatch(deliverOrder(order._id));
     };
+    const generatePDF = () => {
+        const input = document.getElementById('page');
+    html2canvas(input)
+        .then((canvas) => {
+            const imgData = canvas.toDataURL('images/png');
+            const pdf = new jsPDF('p', 'pt','a3');
+            var width = pdf.internal.pageSize.getWidth();
+            var height = pdf.internal.pageSize.getHeight();
+            pdf.addImage(imgData, 'JPEG', 0, 0, width, height);
+            pdf.save("order.pdf");
+        });
+    }
     return loading ? (<LoadingBox></LoadingBox>) :
         error ? (<MessageBox variant="danger">{error}</MessageBox>) :
             (
-                <div>
+                <div id="page">
                     <h1>Order {order._id}</h1>
                     <div className="row top">
                         <div className="col-2">
@@ -204,6 +219,9 @@ function SeeOrder(props) {
                                                 Deliver Order
                                             </button>
                                         </li>
+                                    )}
+                                    {userInfo.isAdmin && (
+                                        <button onClick={generatePDF} type="primary">Xuất file PDF</button>
                                     )}
                                 </ul>
                             </div>

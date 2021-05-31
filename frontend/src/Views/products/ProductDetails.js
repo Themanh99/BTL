@@ -210,16 +210,16 @@ function ProductDetails(props) {
                                                 {userInfo ? (
                                                     <form className="form" onSubmit={submitHandler}>
                                                         <div>
-                                                            <h2>Write a customer review</h2>
+                                                            <h2>Viết đánh giá của bạn ở đây</h2>
                                                         </div>
                                                         <div>
-                                                            <label htmlFor="rating">Rating</label>
+                                                            <label htmlFor="rating">Đánh giá</label>
                                                             <select
                                                                 id="rating"
                                                                 value={rating}
                                                                 onChange={(e) => setRating(e.target.value)}
                                                             >
-                                                                <option value="">Select...</option>
+                                                                <option value="">Chọn...</option>
                                                                 <option value="1">1- Poor</option>
                                                                 <option value="2">2- Fair</option>
                                                                 <option value="3">3- Good</option>
@@ -228,7 +228,7 @@ function ProductDetails(props) {
                                                             </select>
                                                         </div>
                                                         <div>
-                                                            <label htmlFor="comment">Comment</label>
+                                                            <label htmlFor="comment">Bình luận</label>
                                                             <textarea
                                                                 id="comment"
                                                                 value={comment}

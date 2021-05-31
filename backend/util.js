@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import mg from 'mailgun-js';
 
+
 const generateToken = (user) => {
     return jwt.sign(
       {
@@ -55,7 +56,7 @@ export const isSellerOrAdmin = (req, res, next) => {
     res.status(401).send({ message: 'Invalid Admin/Seller Token' });
   }
 };
-export const mailgun = () =>
+export const mail = () =>
   mg({
     apiKey: process.env.MAILGUN_API_KEY,
     domain: process.env.MAILGUN_DOMAIN,

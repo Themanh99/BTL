@@ -1,9 +1,10 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
-import { isAuth , isAdmin , isSellerOrAdmin ,mailgun, payOrderEmailTemplate} from '../util.js';
+import { isAuth , isAdmin , isSellerOrAdmin , mail, payOrderEmailTemplate} from '../util.js';
 import Order from '../models/orderModel.js';
 import User from '../models/userModel.js';
 import Product from '../models/productModel.js';
+
 
 const orderRouter = express.Router();
 
@@ -128,10 +129,7 @@ orderRouter.put(
     '/:id/pay',
     isAuth,
     expressAsyncHandler(async (req, res) => {
-      const order = await Order.findById(req.params.id).populate(
-        'user',
-        'email name'
-      );
+      const order = await Order.findById(req.params.id);
       if (order) {
         order.isPaid = true;
         order.paidAt = Date.now();
@@ -139,18 +137,14 @@ orderRouter.put(
           id: req.body.id,
           status: req.body.status,
           update_time: req.body.update_time,
-          email_address: 'themanhchu1@gmail.com',
+          email_address: 'themanhchu99@gmail.com',
         };
-        const updatedOrder = await order.save();
-        mailgun()
-        .messages()
-        .send(
+        mail().messages().send(
           {
-            from: 'Anh Cherry <sandbox55e027e35dc2454a8864bdec8c266919.mailgun.org>',
-            to: '<themanhchu1@gmail.com>',
+            from: 'Anh Cherry <sandboxe62726cf5e644aab9694c40bd14afaa8.mailgun.org>',
+            to: `<${order.user.email}>`,
             subject: `New order ${order._id}`,
-            text: "Ban da thanh toan online qua trang web",
-            // html: payOrderEmailTemplate(order),
+            html: payOrderEmailTemplate(order),
           },
           (error, body) => {
             if (error) {
@@ -160,6 +154,7 @@ orderRouter.put(
             }
           }
         );
+        const updatedOrder = await order.save();
         res.send({ message: 'Order đã thanh toán!', order: updatedOrder });
       } else {
         res.status(404).send({ message: 'Order Not Found' });
@@ -170,7 +165,7 @@ orderRouter.put(
   orderRouter.delete(
     '/:id',
     isAuth,
-    isAdmin,
+    // isAdmin,
     expressAsyncHandler(async (req, res) => {
       const order = await Order.findById(req.params.id);
       if (order) {

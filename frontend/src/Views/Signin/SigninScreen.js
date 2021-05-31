@@ -39,7 +39,7 @@ function SigninScreen(props) {
           <h1>Đăng nhập</h1>
         </div>
         {loading && <LoadingBox></LoadingBox>}
-        {error && <MessageBox variant="danger">{error}</MessageBox>}
+        {error && <MessageBox variant="danger">Tên tài khoản hoặc mật khẩu không chính xác!</MessageBox>}
         <div>
           <label htmlFor="email">Địa chỉ Email</label>
           <input

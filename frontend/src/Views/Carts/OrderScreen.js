@@ -18,7 +18,7 @@ function OrderScreen(props) {
     cart.itemsPrice = toPrice(
         cart.cartItems.reduce((a, c) => a + c.slmua * c.price, 0)
     );
-    cart.shippingPrice = cart.itemsPrice > 100 ? toPrice(0) : toPrice(10); // phi ship
+    cart.shippingPrice = cart.itemsPrice > 100 ? toPrice(0) : toPrice(1); // phi ship
     cart.taxPrice = toPrice(0.15 * cart.itemsPrice); // thue
     cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
     const dispatch = useDispatch();
@@ -92,7 +92,7 @@ function OrderScreen(props) {
                     <div className="card card-body">
                         <ul>
                             <li>
-                                <h2>Order Summary</h2>
+                                <h2>Tổng đơn hàng</h2>
                             </li>
                             <li>
                                 <div className="row">

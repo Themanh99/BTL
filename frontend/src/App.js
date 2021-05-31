@@ -33,6 +33,8 @@ import SearchScreen from './Views/homescreen/SearchScreen';
 import SearchBox from './Views/Searchs/Searchs';
 import DashboardScreen from './Views/homescreen/Thongke';
 import OrderEditScreen from './Views/homescreen/OrderEditScreen';
+import SupportScreen from './Views/homescreen/SupportScreen';
+import ChatBox from './Views/Components/ChatBox';
 
 
 const { Header, Content ,Footer } = Layout;
@@ -127,9 +129,11 @@ function App() {
             component={DashboardScreen}
             render
           ></AdminRoute>
+          <AdminRoute path="/support" component={SupportScreen}></AdminRoute>
         <SellerRoute path="/manageproduct/seller" component={ManageProduct} exact/>
         <SellerRoute path="/manageorder/seller" component={OrderListScreen} exact/>
       </Content>
+      {userInfo && !userInfo.isAdmin && <ChatBox userInfo={userInfo} />}
       <Footer>
         <Footers />
       </Footer>

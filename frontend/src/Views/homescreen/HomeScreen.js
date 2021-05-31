@@ -74,7 +74,7 @@ function HomeScreen(props) {
                             )
                     }
                     <div className="row">
-                        <div className="col" style={{ backgroundColor: 'aliceblue', margin: '5px', borderRadius: '10px', marginLeft: '20px' }}>
+                        <div className="col" style={{width:'550px',backgroundColor: 'aliceblue', margin: '5px', borderRadius: '10px', marginLeft: '20px' }}>
                             <div className="row">
                                 <div className="col" style={{ textAlignLast: 'left' }}>
                                     <img alt="" src="images/icon1.png" style={{ width: '100px', height: '100px', marginTop: '14px' }} />
@@ -85,7 +85,7 @@ function HomeScreen(props) {
                                 </div>
                             </div>
                         </div>
-                        <div className="col" style={{ backgroundColor: 'aliceblue', margin: '5px', borderRadius: '10px' }}>
+                        <div className="col" style={ {width:'550px',backgroundColor: 'aliceblue', margin: '5px', borderRadius: '10px' }}>
                             <div className="row">
                                 <div className="col" style={{ textAlignLast: 'left' }}>
                                     <img alt="" src="images/icon3.png" style={{ width: '100px', height: '100px', marginTop: '14px' }} />
